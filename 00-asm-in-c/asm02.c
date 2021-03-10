@@ -1,3 +1,7 @@
+/**
+ * From http://www.ce.uniroma2.it/~pellegrini/
+ */
+
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -9,7 +13,7 @@ void swap(long *a, long *b)
         "pop (%%rax)\n"
         "pop (%%rbx)"
         : "=a"(a), "=b"(b)
-        : "0"(a), "1"(b)
+        : "a"(a), "b"(b)
         : "memory");
 }
 
