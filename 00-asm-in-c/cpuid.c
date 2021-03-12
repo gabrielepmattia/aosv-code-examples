@@ -20,7 +20,7 @@
  * @param a eax register content
  * @param d edx register content
  */
-void cpuid(int code, uint32_t *a, uint32_t *c, uint32_t *d)
+void cpuid(int code, uint32_t *c, uint32_t *d)
 {
     __asm__("cpuid"
             : "=c"(*c), "=d"(*d)
@@ -52,13 +52,11 @@ int testbit(int bitn, uint32_t *reg)
 
 int main()
 {
-    uint32_t a;
     uint32_t c;
     uint32_t d;
 
-    cpuid(FEATURE_INFO, &a, &c, &d);
+    cpuid(FEATURE_INFO, &c, &d);
 
-    printf("EAX = %x\n", a);
     printf("ECX = %x\n", c);
     printf("EDX = %x\n", d);
 
