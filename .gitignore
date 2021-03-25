@@ -35,3 +35,4 @@
 .*
 *.order
 *.symvers
+*.out
