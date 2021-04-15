@@ -7,7 +7,7 @@ MODULE_DESCRIPTION("Linked List example");
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Gabriele Proietti Mattia <pm.gabriele@outlook.com>");
 
-#define MODULE_NAME_LOG "my_module: "
+#define MODULE_NAME_LOG "my_lists: "
 
 typedef struct my_list_item
 {
@@ -25,6 +25,8 @@ static int my_module_init(void)
         my_list_item *item3 = kmalloc(sizeof(my_list_item), GFP_KERNEL);
         struct list_head *current_item_list;
         my_list_item *current_item;
+
+        printk(KERN_DEBUG MODULE_NAME_LOG "init\n");
 
         // init list head
         INIT_LIST_HEAD(&my_list);
@@ -46,18 +48,18 @@ static int my_module_init(void)
         list_add(&item2->list, &my_list);
         list_add(&item3->list, &my_list);
 
-        printk(KERN_DEBUG MODULE_NAME_LOG "&item1=%p", item1);
-        printk(KERN_DEBUG MODULE_NAME_LOG "&item2=%p", item2);
-        printk(KERN_DEBUG MODULE_NAME_LOG "&item3=%p", item3);
+        printk(KERN_DEBUG MODULE_NAME_LOG "&item1=%p\n", item1);
+        printk(KERN_DEBUG MODULE_NAME_LOG "&item2=%p\n", item2);
+        printk(KERN_DEBUG MODULE_NAME_LOG "&item3=%p\n", item3);
 
         // traverse list
         list_for_each(current_item_list, &my_list)
         {
                 current_item = list_entry(current_item_list, my_list_item, list);
-                printk(KERN_DEBUG MODULE_NAME_LOG "&current_item=%p, current_item->id=%d", current_item, current_item->id);
+                printk(KERN_DEBUG MODULE_NAME_LOG "&current_item=%p, current_item->id=%d\n", current_item, current_item->id);
         }
 
-        printk(KERN_DEBUG MODULE_NAME_LOG "list_empty(&my_list)=%d", list_empty(&my_list));
+        printk(KERN_DEBUG MODULE_NAME_LOG "list_empty(&my_list)=%d\n", list_empty(&my_list));
 
         // delete the items from the list
         list_del(&item1->list);

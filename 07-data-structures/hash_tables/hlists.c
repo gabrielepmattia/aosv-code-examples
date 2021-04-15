@@ -8,7 +8,7 @@ MODULE_DESCRIPTION("Linked List example");
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Gabriele Proietti Mattia <pm.gabriele@outlook.com>");
 
-#define MODULE_NAME_LOG "my_module: "
+#define MODULE_NAME_LOG "my_hlists: "
 
 #define MY_HASH_BITS 4
 
@@ -28,6 +28,8 @@ static int my_module_init(void)
         my_list_item *item3 = kmalloc(sizeof(my_list_item), GFP_KERNEL);
         my_list_item *current_item;
         int current_bucket;
+
+        printk(KERN_DEBUG MODULE_NAME_LOG "init\n");
 
         // init hash list
         hash_init(my_hash);
@@ -49,14 +51,14 @@ static int my_module_init(void)
         hash_add(my_hash, &item2->list, item2->id);
         hash_add(my_hash, &item3->list, item3->id);
 
-        printk(KERN_DEBUG MODULE_NAME_LOG "&item1=%p", item1);
-        printk(KERN_DEBUG MODULE_NAME_LOG "&item2=%p", item2);
-        printk(KERN_DEBUG MODULE_NAME_LOG "&item3=%p", item3);
+        printk(KERN_DEBUG MODULE_NAME_LOG "&item1=%p\n", item1);
+        printk(KERN_DEBUG MODULE_NAME_LOG "&item2=%p\n", item2);
+        printk(KERN_DEBUG MODULE_NAME_LOG "&item3=%p\n", item3);
 
         // traverse list
         hash_for_each(my_hash, current_bucket, current_item, list)
         {
-                printk(KERN_DEBUG MODULE_NAME_LOG "&current_item=%p, current_item->id=%d", current_item, current_item->id);
+                printk(KERN_DEBUG MODULE_NAME_LOG "&current_item=%p, current_item->id=%d\n", current_item, current_item->id);
         }
 
         // delete the items from the table
@@ -73,7 +75,7 @@ static int my_module_init(void)
 
 static void my_module_exit(void)
 {
-        printk(KERN_DEBUG MODULE_NAME_LOG "exit");
+        printk(KERN_DEBUG MODULE_NAME_LOG "exit\n");
 }
 
 module_init(my_module_init);
