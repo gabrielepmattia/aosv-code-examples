@@ -66,6 +66,8 @@ static int my_module_init(void)
         list_del(&item2->list);
         list_del(&item3->list);
 
+        printk(KERN_DEBUG MODULE_NAME_LOG "list_empty(&my_list)=%d\n", list_empty(&my_list));
+
         kfree(item1);
         kfree(item2);
         kfree(item3);
