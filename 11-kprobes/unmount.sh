@@ -1,0 +1,1 @@
+sudo rmmod kprobe_example.ko
