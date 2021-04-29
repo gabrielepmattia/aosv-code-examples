@@ -1,0 +1,1 @@
+sudo rmmod ftrace_hooking.ko
